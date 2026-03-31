@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">DedClick</string>
+    <string name="greeting">Здравствуйте, Нина!</string>
+    <string name="card_title_1">Всё в порядке</string>
+    <string name="card_title_2">Доверенные лица</string>
+    <string name="card_subtitle">Нажмите, чтобы отправить уведомление всем доверенным лицам.</string>
+    <string name="additional_info">Просмотр списка, добавление и удаление контактов.</string>
+    <string name="last_signal">Последний сигнал был отправлен сегодня в 09:42</string>
+
+    <string name="trusted_people">Доверенные лица</string>
+    <string name="everything_ok">Всё в порядке</string>
+    <string name="press_to_notify">Нажмите, чтобы отправить уведомление всем доверенным лицам.</string>
 </resources>

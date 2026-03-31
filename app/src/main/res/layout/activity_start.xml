@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9FAFB">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Приветствие -->
+        <TextView
+            android:id="@+id/greeting_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/greeting"
+            android:textSize="14sp"
+            android:textColor="#334155"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:gravity="center"/>
+
+        <!-- Зеленая карточка -->
+        <View
+            android:id="@+id/card_green"
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_below="@id/greeting_text"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_button_green"/>
+
+        <!-- Заголовок на зеленой карточке -->
+        <TextView
+            android:id="@+id/title_green_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trusted_people"
+            android:textSize="28sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+        <!-- Белая карточка -->
+        <View
+            android:id="@+id/card_white"
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_below="@id/card_green"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_card_grey"/>
+
+        <!-- Заголовок на белой карточке -->
+        <TextView
+            android:id="@+id/title_white_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/everything_ok"
+            android:textSize="28sp"
+            android:textColor="#0F172A"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Подпись на белой карточке -->
+        <TextView
+            android:id="@+id/subtitle_white_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/press_to_notify"
+            android:textSize="14sp"
+            android:textColor="#0F172A"
+            android:gravity="center"
+            android:layout_below="@id/title_white_card"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Нижняя карточка "Последний сигнал" -->
+        <View
+            android:id="@+id/last_signal_bg"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/card_white"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_last_signal"/>
+
+        <TextView
+            android:id="@+id/last_signal_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/last_signal"
+            android:textSize="14sp"
+            android:textColor="#065F46"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+</ScrollView>
