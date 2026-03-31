@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Кнопка назад -->
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_card_grey"
+            android:src="@drawable/arrow_back"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:tint="#0F172A"/>
+
+        <!-- Карточка -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:padding="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_grey"
+            android:elevation="8dp">
+
+            <!-- Заголовок -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Создать аккаунт"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#0F172A"
+                android:layout_gravity="center"/>
+
+            <!-- Имя -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Имя"
+                android:textSize="14sp"
+                android:textColor="#334155"
+                android:layout_marginTop="24dp"/>
+
+            <EditText
+                android:id="@+id/input_name"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Введите ФИО"
+                android:paddingHorizontal="16dp"
+                android:textColor="#0F172A"
+                android:textColorHint="#94A3B8"/>
+
+            <!-- Телефон -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Номер телефона"
+                android:textSize="14sp"
+                android:textColor="#334155"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/input_phone"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Введите номер телефона"
+                android:paddingHorizontal="16dp"
+                android:textColor="#0F172A"
+                android:textColorHint="#94A3B8"/>
+
+            <!-- Выбор роли -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выберите роль"
+                android:textSize="14sp"
+                android:textColor="#334155"
+                android:layout_marginTop="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <!-- Пожилой -->
+                <LinearLayout
+                    android:id="@+id/role_elder"
+                    android:layout_width="0dp"
+                    android:layout_height="84dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_role_selected"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Пожилой"
+                        android:textSize="16sp"
+                        android:textColor="#0F172A"/>
+                </LinearLayout>
+
+                <!-- Доверенное лицо -->
+                <LinearLayout
+                    android:id="@+id/role_helper"
+                    android:layout_width="0dp"
+                    android:layout_height="84dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_role_unselected"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Доверенное лицо"
+                        android:textSize="16sp"
+                        android:textColor="#0F172A"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Кнопка -->
+        <LinearLayout
+            android:id="@+id/btn_register"
+            android:layout_width="280dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_button_green"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Зарегистрироваться"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
