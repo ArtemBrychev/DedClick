@@ -1,98 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F9FAFB">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp">
 
-        <!-- Приветствие -->
-        <TextView
-            android:id="@+id/greeting_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/greeting"
-            android:textSize="14sp"
-            android:textColor="#334155"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
-            android:gravity="center"/>
-
-        <!-- Зеленая карточка -->
-        <View
-            android:id="@+id/card_green"
+        <!-- Верхняя карточка -->
+        <LinearLayout
+            android:id="@+id/card_top"
             android:layout_width="match_parent"
-            android:layout_height="132dp"
-            android:layout_below="@id/greeting_text"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_button_green"/>
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:gravity="center">
 
-        <!-- Заголовок на зеленой карточке -->
-        <TextView
-            android:id="@+id/title_green_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/trusted_people"
-            android:textSize="28sp"
-            android:textColor="#FFFFFF"
-            android:gravity="center"
-            android:layout_centerInParent="true"/>
+            <!-- Круглый фон с логотипом -->
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center">
 
-        <!-- Белая карточка -->
-        <View
-            android:id="@+id/card_white"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_circle"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/pd_logo"
+                    android:scaleType="centerInside"/>
+            </FrameLayout>
+
+            <!-- Заголовок -->
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Предохронитель\nдеда"
+                android:textSize="28sp"
+                android:textColor="#0F172A"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- Нижние кнопки / прямоугольники -->
+        <LinearLayout
+            android:id="@+id/buttons_container"
             android:layout_width="match_parent"
-            android:layout_height="132dp"
-            android:layout_below="@id/card_green"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_card_grey"/>
-
-        <!-- Заголовок на белой карточке -->
-        <TextView
-            android:id="@+id/title_white_card"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/everything_ok"
-            android:textSize="28sp"
-            android:textColor="#0F172A"
+            android:orientation="vertical"
+            android:layout_below="@id/card_top"
+            android:layout_marginTop="132dp"
             android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"/>
+            android:spacing="16dp">
 
-        <!-- Подпись на белой карточке -->
-        <TextView
-            android:id="@+id/subtitle_white_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/press_to_notify"
-            android:textSize="14sp"
-            android:textColor="#0F172A"
-            android:gravity="center"
-            android:layout_below="@id/title_white_card"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"/>
+            <!-- Тёмная кнопка -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_button_dark"
+                android:gravity="center">
 
-        <!-- Нижняя карточка "Последний сигнал" -->
-        <View
-            android:id="@+id/last_signal_bg"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/card_white"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_last_signal"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Войти"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/last_signal_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/last_signal"
-            android:textSize="14sp"
-            android:textColor="#065F46"
-            android:gravity="center"
-            android:layout_centerInParent="true"/>
+            <!-- Светлая кнопка -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_button_light"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Зарегистрироваться"
+                    android:textSize="20sp"
+                    android:textColor="#0F172A"/>
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 </ScrollView>
