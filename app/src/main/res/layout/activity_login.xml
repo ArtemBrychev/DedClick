@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Кнопка назад -->
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_card_grey"
+            android:src="@drawable/arrow_back"
+            android:padding="8dp"
+            android:scaleType="centerInside"/>
+
+        <!-- Карточка -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:padding="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_grey"
+            android:elevation="8dp"
+            android:translationZ="8dp">
+
+            <!-- Заголовок -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Вход в аккаунт"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#0F172A"
+                android:layout_gravity="center"/>
+
+            <!-- Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Номер телефона"
+                android:textSize="14sp"
+                android:textColor="#334155"
+                android:layout_marginTop="24dp"/>
+
+            <!-- Поле ввода -->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Введите номер телефона"
+                android:paddingHorizontal="16dp"
+                android:textColor="#0F172A"
+                android:textColorHint="#94A3B8"/>
+
+            <!-- Кнопка -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_button_dark"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Войти"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Нижний текст -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нет аккаунта? Зарегистрироваться"
+            android:textSize="14sp"
+            android:textColor="#64748B"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</ScrollView>
