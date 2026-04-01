@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Кнопка назад -->
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_card_grey"
+            android:src="@drawable/arrow_back"
+            android:padding="8dp"
+            android:scaleType="centerInside" />
+
+        <!-- Большая белая карточка сверху -->
+        <LinearLayout
+            android:id="@+id/top_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/back_button"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_button_light_28"
+            android:padding="20dp">
+
+            <!-- Заголовок внутри карточки -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Добавить по номеру телефона"
+                android:textSize="14sp"
+                android:textColor="#334155" />
+
+            <!-- Ряд: поле ввода + кнопка -->
+            <LinearLayout
+                android:id="@+id/phone_input_row"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Поле ввода -->
+                <LinearLayout
+                    android:id="@+id/phone_input_container"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_grey"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Введите номер телефона"
+                        android:textSize="14sp"
+                        android:textColor="#94A3B8" />
+                </LinearLayout>
+
+                <!-- Кнопка + -->
+                <ImageView
+                    android:id="@+id/add_button"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/bg_button_dark_20"
+                    android:src="@drawable/ic_plus"
+                    android:padding="12dp"
+                    android:scaleType="centerInside" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Контейнер списка -->
+        <LinearLayout
+            android:id="@+id/elder_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/top_card"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_elder_person" />
+            <include layout="@layout/item_elder_person" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

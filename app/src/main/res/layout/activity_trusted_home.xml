@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Кнопка назад -->
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_card_grey"
+            android:src="@drawable/arrow_back"
+            android:padding="8dp"
+            android:scaleType="centerInside" />
+
+        <!-- Тёмная карточка -->
+        <LinearLayout
+            android:id="@+id/card_dark"
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_below="@id/back_button"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_button_dark_28"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Последнее уведомление"
+                android:textSize="14sp"
+                android:textColor="#CBD5E1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Всё в порядке"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="от Нины Сергеевны • сегодня в 09:42"
+                android:textSize="14sp"
+                android:textColor="#CBD5E1" />
+        </LinearLayout>
+
+        <!-- Светлая карточка -->
+        <LinearLayout
+            android:id="@+id/card_light"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_below="@id/card_dark"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_grey"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Мои пожилые"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:textColor="#0F172A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Список подключённых пользователей"
+                android:textSize="14sp"
+                android:textColor="#64748B" />
+        </LinearLayout>
+
+        <!-- Большой текстовый блок -->
+        <TextView
+            android:id="@+id/info_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_light"
+            android:layout_marginTop="32dp"
+            android:text="Нажмите, чтобы увидеть список пожилых или добавить новых."
+            android:textSize="14sp"
+            android:textColor="#0F172A"
+            android:gravity="center" />
+
+    </RelativeLayout>
+</ScrollView>
