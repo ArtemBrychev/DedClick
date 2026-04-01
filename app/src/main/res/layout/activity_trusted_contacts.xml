@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:id="@+id/screen_trus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Кнопка назад -->
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_card_grey"
+            android:src="@drawable/arrow_back"
+            android:padding="8dp"
+            android:scaleType="centerInside" />
+
+        <!-- Заголовок -->
+        <TextView
+            android:id="@+id/title_trusted"
+            android:layout_below="@id/back_button"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_button_dark"
+            android:layout_marginTop="8dp"
+            android:text="Доверенные лица"
+            android:textSize="21sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center" />
+
+        <!-- Контейнер для списка -->
+        <LinearLayout
+            android:id="@+id/trusted_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_trusted"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Пример элемента списка (можешь удалить, если хочешь пустой экран) -->
+            <include layout="@layout/item_trusted_person" />
+
+            <include layout="@layout/item_trusted_person" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

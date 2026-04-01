@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_button_light"
+    android:padding="20dp"
+    android:layout_marginBottom="16dp">
+
+    <!-- Имя + телефон -->
+    <TextView
+        android:id="@+id/person_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Анна Иванова\n+7 (925) 814 67 34"
+        android:textSize="16sp"
+        android:textColor="#0F172A"
+        android:gravity="center_vertical" />
+
+    <!-- Кнопка удаления -->
+    <ImageView
+        android:id="@+id/delete_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_delete_cross"
+        android:src="@drawable/cross"
+        android:padding="6dp"
+        android:scaleType="centerInside" />
+
+</RelativeLayout>
