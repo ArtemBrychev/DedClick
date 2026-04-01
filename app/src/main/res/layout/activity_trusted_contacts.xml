@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/bg_button_dark"
+            android:background="@drawable/bg_button_dark_20"
             android:layout_marginTop="8dp"
             android:text="Доверенные лица"
             android:textSize="21sp"

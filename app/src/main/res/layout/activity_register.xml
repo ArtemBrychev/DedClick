@@ -149,7 +149,7 @@
             android:layout_width="280dp"
             android:layout_height="56dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/bg_button_green"
+            android:background="@drawable/bg_button_green_24"
             android:gravity="center"
             android:layout_gravity="center_horizontal">
 
