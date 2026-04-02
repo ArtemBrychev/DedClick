@@ -3,29 +3,25 @@ package com.example.dedclick
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import com.example.dedclick.databinding.ActivityLoginBinding
+import com.example.dedclick.databinding.ActivityRegisterBinding
 
-class LoginActivity : ComponentActivity() {
+class RegisterActivity: ComponentActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceStore: Bundle?){
         super.onCreate(savedInstanceStore)
-
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val priveousButton = binding.priveousButton
         priveousButton.setOnClickListener {
             val clazz = intent.getSerializableExtra(
-                "previous",
+                "previous"
             ) as Class<*>
 
             val intentNew = Intent(this, clazz)
             startActivity(intentNew)
         }
     }
-
-
 }

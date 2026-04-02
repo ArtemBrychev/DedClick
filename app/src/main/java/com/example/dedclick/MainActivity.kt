@@ -1,6 +1,7 @@
 package com.example.dedclick
 
 import android.R
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.example.dedclick.databinding.ActivityStartBinding
@@ -17,12 +18,16 @@ class MainActivity : ComponentActivity() {
 
         val loginButton = binding.loginButton
         loginButton.setOnClickListener {
-            binding.loginButtonText.text = "нажато"
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("previous", MainActivity::class.java)
+            startActivity(intent)
         }
 
         val registerButton = binding.registerButton
         registerButton.setOnClickListener {
-            binding.registerButtonText.text = "нажато"
+            val intent = Intent(this, RegisterActivity::class.java)
+            intent.putExtra("previous", MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
