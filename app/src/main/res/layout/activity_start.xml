@@ -61,12 +61,14 @@
 
             <!-- Тёмная кнопка -->
             <LinearLayout
+                android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/bg_button_dark_24"
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/login_button_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Войти"
@@ -76,6 +78,7 @@
 
             <!-- Светлая кнопка -->
             <LinearLayout
+                android:id="@+id/register_button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
@@ -83,6 +86,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/register_button_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Зарегистрироваться"
