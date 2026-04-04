@@ -1,6 +1,5 @@
-package com.example.dedclick
+package com.example.dedclick.ui
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity

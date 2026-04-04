@@ -1,9 +1,8 @@
-package com.example.dedclick
+package com.example.dedclick.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import com.example.dedclick.databinding.ActivityLoginBinding
 
 class LoginActivity : ComponentActivity() {
@@ -18,11 +17,7 @@ class LoginActivity : ComponentActivity() {
 
         val priveousButton = binding.priveousButton
         priveousButton.setOnClickListener {
-            val clazz = intent.getSerializableExtra(
-                "previous",
-            ) as Class<*>
-
-            val intentNew = Intent(this, clazz)
+            val intentNew = Intent(this, MainActivity::class.java)
             startActivity(intentNew)
         }
     }

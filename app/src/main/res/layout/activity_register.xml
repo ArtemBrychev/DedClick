@@ -118,7 +118,7 @@
 
                 <!-- Доверенное лицо -->
                 <LinearLayout
-                    android:id="@+id/role_helper"
+                    android:id="@+id/role_trusted"
                     android:layout_width="0dp"
                     android:layout_height="84dp"
                     android:layout_weight="1"
