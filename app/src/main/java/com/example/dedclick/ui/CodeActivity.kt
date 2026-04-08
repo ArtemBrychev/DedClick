@@ -11,9 +11,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
+import com.example.dedclick.data.RoleDataStoreManager
+import com.example.dedclick.data.TokenDataStoreManager
 import com.example.dedclick.databinding.ActivityCodeBinding
+import kotlinx.coroutines.launch
 
 class CodeActivity : ComponentActivity() {
 
@@ -21,11 +26,17 @@ class CodeActivity : ComponentActivity() {
     private lateinit var hiddenInput: EditText
     private lateinit var boxes: List<TextView>
 
+    private lateinit var tokenDataStoreManager: TokenDataStoreManager
+    private lateinit var roleDataStoreManager: RoleDataStoreManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityCodeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        tokenDataStoreManager = TokenDataStoreManager(applicationContext)
+        roleDataStoreManager = RoleDataStoreManager(applicationContext)
 
         // Кнопка назад
         binding.priveousButton.setOnClickListener {
@@ -52,6 +63,32 @@ class CodeActivity : ComponentActivity() {
         // Обновляем квадраты при вводе
         hiddenInput.addTextChangedListener {
             updateBoxes(it.toString())
+        }
+
+        val acceptButton = binding.acceptButton
+        acceptButton.setOnClickListener {
+            lifecycleScope.launch{
+                var text = hiddenInput.text
+                if (text.length == 4) {
+                    val username = intent.getStringExtra("username")
+                    val isElder = intent.getBooleanExtra("isElder", true)
+                    val role = if (isElder) "elder" else "trusted"
+                    val token = "Token for some $role named $username"
+                    tokenDataStoreManager.setValue(token)
+                    roleDataStoreManager.setValue(role)
+
+                    if(role=="trusted"){
+                        val intent = Intent(this@CodeActivity, TrustedHomeActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        val intent = Intent(this@CodeActivity, ElderHomeActivity::class.java)
+                        startActivity(intent)
+                    }
+                    finish()
+                } else {
+                    Toast.makeText(this@CodeActivity, "Код не корректный", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 

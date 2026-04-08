@@ -26,6 +26,8 @@
         <activity android:name=".ui.LoginActivity"></activity>
         <activity android:name=".ui.RegisterActivity"></activity>
         <activity android:name=".ui.CodeActivity"></activity>
+        <activity android:name=".ui.ElderHomeActivity"></activity>
+        <activity android:name=".ui.TrustedHomeActivity"></activity>
 
     </application>
 
