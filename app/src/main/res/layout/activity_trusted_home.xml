@@ -10,22 +10,11 @@
         android:layout_height="wrap_content"
         android:padding="20dp">
 
-        <!-- Кнопка назад -->
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_card_grey"
-            android:src="@drawable/arrow_back"
-            android:padding="8dp"
-            android:scaleType="centerInside" />
-
         <!-- Тёмная карточка -->
         <LinearLayout
-            android:id="@+id/card_dark"
+            android:id="@+id/ok_button"
             android:layout_width="match_parent"
             android:layout_height="132dp"
-            android:layout_below="@id/back_button"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
             android:background="@drawable/bg_button_dark_28"
@@ -61,10 +50,10 @@
 
         <!-- Светлая карточка -->
         <LinearLayout
-            android:id="@+id/card_light"
+            android:id="@+id/elders_button"
             android:layout_width="match_parent"
             android:layout_height="96dp"
-            android:layout_below="@id/card_dark"
+            android:layout_below="@id/ok_button"
             android:layout_marginTop="24dp"
             android:orientation="vertical"
             android:background="@drawable/bg_card_grey"
@@ -95,12 +84,34 @@
             android:id="@+id/info_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/card_light"
+            android:layout_below="@id/elders_button"
             android:layout_marginTop="32dp"
             android:text="Нажмите, чтобы увидеть список пожилых или добавить новых."
             android:textSize="14sp"
             android:textColor="#0F172A"
             android:gravity="center" />
+
+
+        <!-- КНОПКА ВЫХОДА ИЗ АККАУНТА ТОЛЬКО НА ВРЕМЯ  РАЗРАБОТКИ-->
+        <LinearLayout
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_text"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/ic_delete_cross"
+            android:padding="20dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выйти из аккаунта"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:gravity="center" />
+        </LinearLayout>
 
     </RelativeLayout>
 </ScrollView>

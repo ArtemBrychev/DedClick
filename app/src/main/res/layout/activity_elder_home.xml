@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Здравствуй, Нина!"
+            android:text="Здравствуй, пользователь!"
             android:textSize="20sp"
             android:textColor="#334155"
             android:gravity="center"
@@ -81,7 +81,7 @@
                 android:gravity="center" />
         </LinearLayout>
 
-        <!-- Последний сигнал (оставляю карточку как ты просил) -->
+        <!-- Последний сигнал -->
         <LinearLayout
             android:id="@+id/card_last_signal"
             android:layout_width="match_parent"
@@ -99,6 +99,28 @@
                 android:text="Последний сигнал был отправлен\nсегодня в 09:42"
                 android:textSize="14sp"
                 android:textColor="#065F46"
+                android:gravity="center" />
+        </LinearLayout>
+
+
+        <!-- КНОПКА ВЫХОДА ИЗ АККАУНТА ТОЛЬКО НА ВРЕМЯ  РАЗРАБОТКИ-->
+        <LinearLayout
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_last_signal"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/ic_delete_cross"
+            android:padding="20dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выйти из аккаунта"
+                android:textSize="14sp"
+                android:textColor="@color/black"
                 android:gravity="center" />
         </LinearLayout>
 

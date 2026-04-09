@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -15,8 +14,10 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
-import com.example.dedclick.data.RoleDataStoreManager
-import com.example.dedclick.data.TokenDataStoreManager
+import com.example.dedclick.data.AuthManager
+import com.example.dedclick.data.management.RoleDataStoreManager
+import com.example.dedclick.data.management.TokenDataStoreManager
+import com.example.dedclick.data.model.UserAuthInfo
 import com.example.dedclick.databinding.ActivityCodeBinding
 import kotlinx.coroutines.launch
 
@@ -26,17 +27,14 @@ class CodeActivity : ComponentActivity() {
     private lateinit var hiddenInput: EditText
     private lateinit var boxes: List<TextView>
 
-    private lateinit var tokenDataStoreManager: TokenDataStoreManager
-    private lateinit var roleDataStoreManager: RoleDataStoreManager
-
+    private lateinit var authManager: AuthManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityCodeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        tokenDataStoreManager = TokenDataStoreManager(applicationContext)
-        roleDataStoreManager = RoleDataStoreManager(applicationContext)
+        authManager = AuthManager(applicationContext)
 
         // Кнопка назад
         binding.priveousButton.setOnClickListener {
@@ -74,8 +72,13 @@ class CodeActivity : ComponentActivity() {
                     val isElder = intent.getBooleanExtra("isElder", true)
                     val role = if (isElder) "elder" else "trusted"
                     val token = "Token for some $role named $username"
-                    tokenDataStoreManager.setValue(token)
-                    roleDataStoreManager.setValue(role)
+                    val phone = intent.getStringExtra("phone")
+                    lateinit var userInfo: UserAuthInfo
+                    if(username!=null && phone!=null){
+                        userInfo = UserAuthInfo(token, username, phone, role)
+                    }
+
+                    authManager.saveUserAuthInfo(userInfo)
 
                     if(role=="trusted"){
                         val intent = Intent(this@CodeActivity, TrustedHomeActivity::class.java)

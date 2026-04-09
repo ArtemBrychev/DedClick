@@ -1,4 +1,4 @@
-package com.example.dedclick.data
+package com.example.dedclick.data.management
 
 import kotlinx.coroutines.flow.Flow
 
