@@ -1,5 +1,7 @@
 package com.example.dedclick.service
 
+import android.util.Log
+import com.example.dedclick.BuildConfig
 import com.example.dedclick.data.model.UserRegister
 import com.example.dedclick.data.model.UserTokenRequest
 
@@ -19,6 +21,7 @@ object AuthApiProvider {
         val userRegister = UserRegister(phone, username, roleForBackend)
 
         return try {
+            Log.i("AUTH:API:PROVIDER", "Request sent to: ${BuildConfig.BASE_URL} register(phone: $phone) ")
             val response = authService.register(userRegister)
 
             if (response.isSuccessful) {
@@ -37,6 +40,7 @@ object AuthApiProvider {
 
     suspend fun generateCode(phone: String): ApiResult<Unit> {
         return try {
+            Log.i("AUTH:API:PROVIDER", "Request sent to: ${BuildConfig.BASE_URL} generateCode(phone: $phone) ")
             val response = authService.generateCode(phone)
 
             if (response.isSuccessful) {
@@ -58,13 +62,14 @@ object AuthApiProvider {
         val tokenRequest = UserTokenRequest(phone, code)
 
         return try {
+            Log.i("AUTH:API:PROVIDER", "Request sent to: ${BuildConfig.BASE_URL} login(phone: $phone) ")
             val response = authService.login(tokenRequest)
 
             if (response.isSuccessful) {
-
                 val token = response.body()?.token
 
                 if (token != null) {
+                    Log.i("AUTH:API:PROVIDER", "Получен токен: $token")
                     ApiResult.Success(token)
                 } else {
                     ApiResult.Error(-1, "Empty response body")

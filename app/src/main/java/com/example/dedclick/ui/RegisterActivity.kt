@@ -3,10 +3,15 @@ package com.example.dedclick.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.dedclick.R
 import com.example.dedclick.databinding.ActivityRegisterBinding
+import com.example.dedclick.service.ApiResult
+import com.example.dedclick.service.AuthApiProvider
+import kotlinx.coroutines.launch
 
 class RegisterActivity: ComponentActivity() {
 
@@ -50,26 +55,49 @@ class RegisterActivity: ComponentActivity() {
         registerButton.setOnClickListener {
             val username = nameInput.text.toString()
             val phone = phoneInput.text.toString()
-            //testDataInput(this, username, phone, isElder)
 
-            if(!username.isEmpty() && !phone.isEmpty()) {
-                val intent = Intent(this, CodeActivity::class.java)
-                intent.putExtra("previous", RegisterActivity::class.java)
-                intent.putExtra("username", username)
-                intent.putExtra("phone", phone)
-                intent.putExtra("isElder", isElder)
-                startActivity(intent)
-            }else if(username.isEmpty()){
+            if (username.isEmpty()) {
                 Toast.makeText(this, "Пожалуйста введите ваше имя", Toast.LENGTH_LONG).show()
-            }else{
-                Toast.makeText(this, "Пожалуйста введите ваш номер телефона", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
             }
+
+            if (phone.isEmpty()) {
+                Toast.makeText(this, "Пожалуйста введите ваш номер телефона", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidPhone(phone)) {
+                Toast.makeText(this, "Некорректный формат номера", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(this, CodeActivity::class.java)
+            intent.putExtra("previous", RegisterActivity::class.java)
+            intent.putExtra("phone", phone)
+
+            lifecycleScope.launch {
+                val role = if (isElder) "elder" else "trusted"
+                val result = AuthApiProvider.register(phone, username, role)
+                when (result) {
+                    is ApiResult.Success -> {
+                        Log.i("NETWORK:AUTH:REGISTER", "Запрос был успешен")
+                    }
+                    is ApiResult.Error -> {
+                        Log.i(
+                            "NETWORK:AUTH:REGISTER",
+                            "Запрос не был успешен.\nCode: ${result.code} + Message: ${result.message}"
+                        )
+                    }
+                }
+            }
+
+            startActivity(intent)
         }
+
     }
 
-    private fun testDataInput(context: Context, name:String, phone:String, isElder:Boolean){
-        Toast.makeText(context, "name: $name", Toast.LENGTH_SHORT).show()
-        Toast.makeText(context, "phone: $phone", Toast.LENGTH_SHORT).show()
-        Toast.makeText(context, "is an elder: $isElder", Toast.LENGTH_SHORT).show()
+    fun isValidPhone(phone: String): Boolean {
+        val regex = Regex("^\\+?[0-9]\\d{10,14}$")
+        return regex.matches(phone)
     }
 }

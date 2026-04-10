@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -19,9 +20,14 @@ import com.example.dedclick.data.management.RoleDataStoreManager
 import com.example.dedclick.data.management.TokenDataStoreManager
 import com.example.dedclick.data.model.UserAuthInfo
 import com.example.dedclick.databinding.ActivityCodeBinding
+import com.example.dedclick.service.ApiResult
+import com.example.dedclick.service.AuthApiProvider
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 class CodeActivity : ComponentActivity() {
+
+    //TODO: Переписать сохранение авторизации пользователя на получение запроса с сервера
 
     private lateinit var binding: ActivityCodeBinding
     private lateinit var hiddenInput: EditText
@@ -64,32 +70,64 @@ class CodeActivity : ComponentActivity() {
         }
 
         val acceptButton = binding.acceptButton
+
+        /////////////////////////////////////
+        // ОТПРАВКА ДАННЫХ ДЛЯ АВТОРИЗАЦИИ //
+        /////////////////////////////////////
         acceptButton.setOnClickListener {
-            lifecycleScope.launch{
-                var text = hiddenInput.text
-                if (text.length == 4) {
-                    val username = intent.getStringExtra("username")
-                    val isElder = intent.getBooleanExtra("isElder", true)
-                    val role = if (isElder) "elder" else "trusted"
-                    val token = "Token for some $role named $username"
-                    val phone = intent.getStringExtra("phone")
-                    lateinit var userInfo: UserAuthInfo
-                    if(username!=null && phone!=null){
-                        userInfo = UserAuthInfo(token, username, phone, role)
-                    }
+            lifecycleScope.launch {
+                val code = hiddenInput.text.toString()
+                val username = intent.getStringExtra("username")
+                val phone = intent.getStringExtra("phone")
+                val isElder = intent.getBooleanExtra("isElder", true)
+                val role = if (isElder) "elder" else "trusted"
 
-                    authManager.saveUserAuthInfo(userInfo)
-
-                    if(role=="trusted"){
-                        val intent = Intent(this@CodeActivity, TrustedHomeActivity::class.java)
-                        startActivity(intent)
-                    }else{
-                        val intent = Intent(this@CodeActivity, ElderHomeActivity::class.java)
-                        startActivity(intent)
-                    }
-                    finish()
-                } else {
+                if (code.length != 4 || username == null || phone == null) {
                     Toast.makeText(this@CodeActivity, "Код не корректный", Toast.LENGTH_LONG).show()
+                    return@launch
+                }
+
+                val result = AuthApiProvider.login(phone, code)
+
+                when (result) {
+                    is ApiResult.Success<String> -> {
+                        val token = result.data
+
+                        if (token == null) {
+                            Log.i(
+                                "NETWORK:AUTH:LOGIN",
+                                "Не удалось получить токен"
+                            )
+                            Toast.makeText(
+                                this@CodeActivity,
+                                "Ошибка. Попробуйте позже",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            return@launch
+                        }
+
+                        val userInfo = UserAuthInfo(token, username, phone, role)
+                        authManager.saveUserAuthInfo(userInfo)
+
+                        val nextIntent = if (role == "trusted") {
+                            Intent(this@CodeActivity, TrustedHomeActivity::class.java)
+                        } else {
+                            Intent(this@CodeActivity, ElderHomeActivity::class.java)
+                        }
+
+                        startActivity(nextIntent)
+                        finish()
+                    }
+
+                    is ApiResult.Error -> {
+                        Log.i(
+                            "NETWORK:AUTH:LOGIN",
+                            "Запрос не был успешен.\nCode: ${result.code} + Message: ${result.message}"
+                        )
+
+                        Toast.makeText(this@CodeActivity, "Неправильный код, либо пользователя не существует", Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
                 }
             }
         }
@@ -121,4 +159,6 @@ class CodeActivity : ComponentActivity() {
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
     }
+
+
 }

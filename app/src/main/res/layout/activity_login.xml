@@ -51,6 +51,7 @@
 
             <!-- Поле ввода -->
             <EditText
+                android:id="@+id/phone_input"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
@@ -62,6 +63,7 @@
 
             <!-- Кнопка -->
             <LinearLayout
+                android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"
@@ -80,6 +82,7 @@
 
         <!-- Нижний текст -->
         <TextView
+            android:id="@+id/register_pivot_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Нет аккаунта? Зарегистрироваться"
