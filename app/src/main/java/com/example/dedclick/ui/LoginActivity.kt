@@ -34,7 +34,7 @@ class LoginActivity : ComponentActivity() {
         binding.loginButton.setOnClickListener {
             val phone = binding.phoneInput.text.toString()
             if(!isValidPhone(phone)){
-                Toast.makeText(this, "Неккоректный номер телефона", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Неккоректный номер телефона", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -55,12 +55,12 @@ class LoginActivity : ComponentActivity() {
                         when(result.code){
                             401 -> {
                                 Log.e("NETWORK:AUTH:GENERATECODE", "Запрос на генерацию кода был не успешным")
-                                Toast.makeText(this@LoginActivity, "Такого пользователя не существует", Toast.LENGTH_LONG)
+                                Toast.makeText(this@LoginActivity, "Такого пользователя не существует", Toast.LENGTH_LONG).show()
                                 return@launch
                             }
                             else -> {
-                                Log.e("NETWORK:AUTH:GENERATECODE", "Запрос на генерацию кода был не успешным")
-                                Toast.makeText(this@LoginActivity, "Ошибка, попробуйте позже", Toast.LENGTH_LONG)
+                                Log.e("NETWORK:AUTH:GENERATECODE", "Запрос на генерацию кода был не успешным: ${result.code} ${result.message}")
+                                Toast.makeText(this@LoginActivity, "Ошибка, попробуйте позже", Toast.LENGTH_LONG).show()
                                 return@launch
                             }
                         }

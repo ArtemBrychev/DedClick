@@ -81,17 +81,25 @@ class RegisterActivity: ComponentActivity() {
                 when (result) {
                     is ApiResult.Success -> {
                         Log.i("NETWORK:AUTH:REGISTER", "Запрос был успешен")
+                        startActivity(intent)
+                        finish()
                     }
                     is ApiResult.Error -> {
                         Log.i(
                             "NETWORK:AUTH:REGISTER",
                             "Запрос не был успешен.\nCode: ${result.code} + Message: ${result.message}"
                         )
+                        val message = when(result.code){
+                            400 -> "Неккоректный номер телефона"
+                            404 -> "Неккоректная роль"
+                            409 -> "Данный номер телефона уже занят"
+                            422 -> "Номер телефона не отправлен"
+                            else -> "Ошибка сети, попробуйте позже"
+                        }
+                        Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
-
-            startActivity(intent)
         }
 
     }

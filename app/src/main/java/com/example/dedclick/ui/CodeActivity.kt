@@ -22,6 +22,7 @@ import com.example.dedclick.data.model.UserAuthInfo
 import com.example.dedclick.databinding.ActivityCodeBinding
 import com.example.dedclick.service.ApiResult
 import com.example.dedclick.service.AuthApiProvider
+import com.example.dedclick.service.UserApiProvider
 import kotlinx.coroutines.launch
 import kotlin.math.log
 
@@ -77,27 +78,52 @@ class CodeActivity : ComponentActivity() {
         acceptButton.setOnClickListener {
             lifecycleScope.launch {
                 val code = hiddenInput.text.toString()
-                val username = intent.getStringExtra("username")
                 val phone = intent.getStringExtra("phone")
-                val isElder = intent.getBooleanExtra("isElder", true)
-                val role = if (isElder) "elder" else "trusted"
 
-                if (code.length != 4 || username == null || phone == null) {
+                if (code.length != 4 || phone == null) {
                     Toast.makeText(this@CodeActivity, "Код не корректный", Toast.LENGTH_LONG).show()
                     return@launch
                 }
 
                 val result = AuthApiProvider.login(phone, code)
-
+                var token:String?
                 when (result) {
                     is ApiResult.Success<String> -> {
-                        val token = result.data
+                        token = result.data
+                    }
+                    is ApiResult.Error -> {
+                        Log.i(
+                            "NETWORK:AUTH:LOGIN",
+                            "Запрос не был успешен.\nCode: ${result.code} + Message: ${result.message}"
+                        )
+                        val message = when(result.code){
+                            401 -> "Неправильный код, либо пользователя не существует"
+                            else -> "Ошибка сети, попробуйте позже"
+                        }
 
-                        if (token == null) {
-                            Log.i(
-                                "NETWORK:AUTH:LOGIN",
-                                "Не удалось получить токен"
-                            )
+                        Toast.makeText(this@CodeActivity, message, Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
+                }
+
+                if (token == null) {
+                    Log.i(
+                        "NETWORK:AUTH:LOGIN",
+                        "Не удалось получить токен"
+                    )
+                    Toast.makeText(
+                        this@CodeActivity,
+                        "Ошибка. Попробуйте позже",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@launch
+                }
+
+                val userResult = UserApiProvider.getUserSelfInfo(token)
+                when(userResult){
+                    is ApiResult.Success -> {
+                        val info = userResult.data
+                        if(info==null){
                             Toast.makeText(
                                 this@CodeActivity,
                                 "Ошибка. Попробуйте позже",
@@ -106,7 +132,11 @@ class CodeActivity : ComponentActivity() {
                             return@launch
                         }
 
+                        val username = info.username
+                        val role = info.roleName
+
                         val userInfo = UserAuthInfo(token, username, phone, role)
+                        Log.i("NETWORK:USER:GETCURRENTUSERINFO", "Получена информация о авторизации: $userInfo")
                         authManager.saveUserAuthInfo(userInfo)
 
                         val nextIntent = if (role == "trusted") {
@@ -118,17 +148,18 @@ class CodeActivity : ComponentActivity() {
                         startActivity(nextIntent)
                         finish()
                     }
-
                     is ApiResult.Error -> {
-                        Log.i(
-                            "NETWORK:AUTH:LOGIN",
-                            "Запрос не был успешен.\nCode: ${result.code} + Message: ${result.message}"
-                        )
+                        var message = when(userResult.code){
+                            404 -> "Пользователь не найден"
+                            else -> "Непредвиденная ошибка, попробуйте позже"
+                        }
 
-                        Toast.makeText(this@CodeActivity, "Неправильный код, либо пользователя не существует", Toast.LENGTH_LONG).show()
+                        Log.i("NETWORK:USER:GETCURRENTUSERINFO", message)
+                        Toast.makeText(this@CodeActivity, message, Toast.LENGTH_LONG).show()
                         return@launch
                     }
                 }
+
             }
         }
     }
