@@ -28,7 +28,7 @@ class TrustedContactsActivity : ComponentActivity(){
         lifecycleScope.launch {
             val token = authManager.getUserAuthInfo()?.token
             if(token == null){
-                Toast.makeText(this@TrustedContactsActivity, "Ошибка при получении данныз пользвателя",
+                Toast.makeText(this@TrustedContactsActivity, "Ошибка при получении данных пользвателя",
                     Toast.LENGTH_LONG).show()
                 Log.i("AUTH:MANAGER", "Не удалось получить токен пользователя")
                 return@launch

@@ -24,7 +24,13 @@ class TrustedHomeActivity  : ComponentActivity(){
             lifecycleScope.launch {
                 authManager.clearAuthInfo()
                 startActivity(Intent(this@TrustedHomeActivity, MainActivity::class.java))
+                finish()
             }
+        }
+
+        binding.eldersButton.setOnClickListener {
+            startActivity(Intent(this@TrustedHomeActivity, ElderListActivity::class.java))
+            finish()
         }
     }
 

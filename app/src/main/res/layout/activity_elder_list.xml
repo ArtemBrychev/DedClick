@@ -60,6 +60,7 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:id="@+id/phone_input_field"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Введите номер телефона"
@@ -82,18 +83,12 @@
         </LinearLayout>
 
         <!-- Контейнер списка -->
-        <LinearLayout
-            android:id="@+id/elder_list_container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/elderRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/top_card"
-            android:layout_marginTop="24dp"
-            android:orientation="vertical">
-
-            <include layout="@layout/item_elder_person" />
-            <include layout="@layout/item_elder_person" />
-
-        </LinearLayout>
+            android:layout_marginTop="24dp" />
 
     </RelativeLayout>
 </ScrollView>
