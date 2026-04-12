@@ -28,8 +28,6 @@ import kotlin.math.log
 
 class CodeActivity : ComponentActivity() {
 
-    //TODO: Переписать сохранение авторизации пользователя на получение запроса с сервера
-
     private lateinit var binding: ActivityCodeBinding
     private lateinit var hiddenInput: EditText
     private lateinit var boxes: List<TextView>
@@ -132,7 +130,7 @@ class CodeActivity : ComponentActivity() {
                             return@launch
                         }
 
-                        val username = info.username
+                        val username = info.fullName
                         val role = info.roleName
 
                         val userInfo = UserAuthInfo(token, username, phone, role)

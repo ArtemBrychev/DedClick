@@ -23,7 +23,7 @@
 
         <!-- Первая карточка -->
         <LinearLayout
-            android:id="@+id/card_green"
+            android:id="@+id/signal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_top"
@@ -53,10 +53,10 @@
 
         <!-- Вторая карточка -->
         <LinearLayout
-            android:id="@+id/card_white"
+            android:id="@+id/trusted_list_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/card_green"
+            android:layout_below="@id/signal_button"
             android:layout_marginTop="24dp"
             android:orientation="vertical"
             android:background="@drawable/bg_button_light_28"
@@ -86,7 +86,7 @@
             android:id="@+id/card_last_signal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/card_white"
+            android:layout_below="@id/trusted_list_button"
             android:layout_marginTop="24dp"
             android:orientation="vertical"
             android:background="@drawable/bg_last_signal"

@@ -26,6 +26,12 @@ class ElderHomeActivity  : ComponentActivity(){
         }
 
 
+        binding.trustedListButton.setOnClickListener {
+            val intent = Intent(this, TrustedContactsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
 
         binding.logoutButton.setOnClickListener {
             lifecycleScope.launch {

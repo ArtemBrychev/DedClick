@@ -8,10 +8,9 @@
     <RelativeLayout
         android:id="@+id/screen_trus"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="20dp">
 
-        <!-- Кнопка назад -->
         <ImageView
             android:id="@+id/back_button"
             android:layout_width="40dp"
@@ -21,7 +20,6 @@
             android:padding="8dp"
             android:scaleType="centerInside" />
 
-        <!-- Заголовок -->
         <TextView
             android:id="@+id/title_trusted"
             android:layout_below="@id/back_button"
@@ -35,22 +33,12 @@
             android:textColor="#FFFFFF"
             android:gravity="center" />
 
-        <!-- Контейнер для списка -->
-        <LinearLayout
-            android:id="@+id/trusted_list_container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/trustedRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/title_trusted"
-            android:layout_marginTop="32dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <!-- Пример элемента списка (можешь удалить, если хочешь пустой экран) -->
-            <include layout="@layout/item_trusted_person" />
-
-            <include layout="@layout/item_trusted_person" />
-
-        </LinearLayout>
+            android:layout_marginTop="16dp"/>
 
     </RelativeLayout>
 </ScrollView>

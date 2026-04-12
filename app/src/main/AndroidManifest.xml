@@ -31,6 +31,8 @@
         <activity android:name=".ui.CodeActivity"></activity>
         <activity android:name=".ui.ElderHomeActivity"></activity>
         <activity android:name=".ui.TrustedHomeActivity"></activity>
+        <activity android:name=".ui.ElderListActivity"></activity>
+        <activity android:name=".ui.TrustedContactsActivity"></activity>
 
     </application>
 
