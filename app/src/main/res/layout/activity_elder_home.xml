@@ -94,9 +94,10 @@
             android:gravity="center_horizontal">
 
             <TextView
+                android:id="@+id/last_signal_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Последний сигнал был отправлен\nсегодня в 09:42"
+                android:text="Отправьте сигнал"
                 android:textSize="14sp"
                 android:textColor="#065F46"
                 android:gravity="center" />
