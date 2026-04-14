@@ -36,4 +36,17 @@ object UserApiProvider {
             ApiResult.Error(-1, e.message)
         }
     }
+
+    suspend fun updateActivity(token: String): ApiResult<Unit>{
+        return try{
+            val result = userService.updateActivity("Bearer $token")
+            if(result.isSuccessful){
+                ApiResult.Success(Unit)
+            }else{
+                ApiResult.Error(result.code(), result.message())
+            }
+        }catch(e: Exception){
+            ApiResult.Error(-1, "Получено исключение")
+        }
+    }
 }

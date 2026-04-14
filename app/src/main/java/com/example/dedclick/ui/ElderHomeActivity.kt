@@ -2,15 +2,28 @@ package com.example.dedclick.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dedclick.data.AuthManager
+import com.example.dedclick.data.model.ContactDto
 import com.example.dedclick.databinding.ActivityElderHomeBinding
+import com.example.dedclick.databinding.DialogContactRequestBinding
+import com.example.dedclick.service.ApiResult
+import com.example.dedclick.service.ContactApiProvider
+import com.example.dedclick.service.LocationProvider
+import com.example.dedclick.service.UserApiProvider
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class ElderHomeActivity  : ComponentActivity(){
     private lateinit var binding: ActivityElderHomeBinding
     private lateinit var authManager: AuthManager
+    private lateinit var locationProvider: LocationProvider
+
+    private val shownRequests = mutableSetOf<Long>()
 
     override fun onCreate(savedInstanceStore: Bundle?){
         super.onCreate(savedInstanceStore)
@@ -19,10 +32,60 @@ class ElderHomeActivity  : ComponentActivity(){
         setContentView(binding.root)
 
         authManager = AuthManager(applicationContext)
+        locationProvider = LocationProvider(applicationContext)
 
         lifecycleScope.launch {
             val user = authManager.getUserAuthInfo()
             binding.titleTop.text = "Здравствуй, ${user?.name ?: "пользователь"}!"
+            if(user == null){
+                return@launch
+            }
+            while (isActive) {
+                val result = ContactApiProvider.getContactRequest(user.token)
+                if (result is ApiResult.Success && result.data != null) {
+                    for(contact in result.data){
+                        if (!shownRequests.contains(contact.id)) {
+                            shownRequests.add(contact.id)
+                            showContactDialog(contact)
+                        }
+                    }
+                }
+                delay(30000)
+            }
+        }
+
+        lifecycleScope.launch {
+            val token = authManager.getUserAuthInfo()?.token
+            if(token == null){
+                Toast.makeText(this@ElderHomeActivity,
+                    "Ошибка получения информации пользователя.\n" +
+                            "Пожалуйста перезайдите в аккаунт.", Toast.LENGTH_LONG).show()
+                return@launch
+            }
+            val result = UserApiProvider.updateActivity(token)
+            when(result){
+                is ApiResult.Success -> {
+                    Log.i("NETWORK:USER:ACTIVITY", "Информация о активности пользователя передана в ФСБ")
+                }
+                is ApiResult.Error -> {
+                    val message = when(result.code){
+                        401 -> "Ошибка получения информации пользователя.\n" +
+                                "Пожалуйста перезайдите в аккаунт."
+                        else -> null
+                    }
+
+                    if(message!=null){
+                        Toast.makeText(this@ElderHomeActivity,
+                            message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+
+        binding.signalButton.setOnClickListener {
+            Log.i("ELDERHOME:GPS:LOCATION", "Before getLocation call")
+            getLocation()
+            Log.i("ELDERHOME:GPS:LOCATION", "After getLocation call")
         }
 
 
@@ -38,6 +101,93 @@ class ElderHomeActivity  : ComponentActivity(){
                 authManager.clearAuthInfo()
                 startActivity(Intent(this@ElderHomeActivity, MainActivity::class.java))
             }
+        }
+    }
+
+    fun showContactDialog(contact: ContactDto) {
+        val binding = DialogContactRequestBinding.inflate(layoutInflater)
+
+        binding.requestText.text =
+            "Контакт ${contact.keeper.fullName} хочет стать вашим доверенным лицом"
+
+        val dialog = android.app.AlertDialog.Builder(this)
+            .setView(binding.root)
+            .setCancelable(false)
+            .create()
+
+        binding.acceptButton.setOnClickListener {
+            lifecycleScope.launch {
+                val token = authManager.getUserAuthInfo()?.token
+                if(token==null){
+                    Toast.makeText(this@ElderHomeActivity,
+                        "Ошибка при получении данных пользователя. Перезайдите в приложение",
+                        Toast.LENGTH_LONG).show()
+                    return@launch
+                }
+                val result = ContactApiProvider.respondContact(contact.id, token)
+                when(result){
+                    is ApiResult.Success -> {
+                        //Тут надо  вывести другое окно о принятии
+                        Toast.makeText(this@ElderHomeActivity,
+                            "Контакт добавлен",
+                            Toast.LENGTH_LONG).show()
+                    }
+                    is ApiResult.Error -> {
+                        val message = when(result.code){
+                            401 -> "Ошибка при получении данных пользователя. Перезайдите в приложение"
+                            else -> "Непрдевиденная ошибка. Попробуйте позже"
+                        }
+                        Toast.makeText(this@ElderHomeActivity, message, Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                dialog.dismiss()
+            }
+        }
+
+        binding.rejectButton.setOnClickListener {
+            lifecycleScope.launch {
+                val token = authManager.getUserAuthInfo()?.token
+                if(token==null){
+                    Toast.makeText(this@ElderHomeActivity,
+                        "Ошибка при получении данных пользователя. Перезайдите в приложение",
+                        Toast.LENGTH_LONG).show()
+                    return@launch
+                }
+                val result = ContactApiProvider.deleteContact(contact.id, token)
+                val message = when(result){
+                    is ApiResult.Success -> {
+                        "Запрос не принят"
+                    }
+                    is ApiResult.Error -> {
+                        when(result.code){
+                            401 -> "Ошибка при получении данных пользователя. Перезайдите в приложение"
+                            else -> "Непрдевиденная ошибка. Попробуйте позже"
+                        }
+                    }
+                }
+
+                Toast.makeText(this@ElderHomeActivity, message, Toast.LENGTH_LONG).show()
+                dialog.dismiss()
+            }
+        }
+
+        dialog.show()
+    }
+
+    private fun getLocation() {
+        locationProvider.getCurrentLocation { location ->
+            val lat:Double?
+            val lon:Double?
+            if (location != null) {
+                lat = location.latitude
+                lon = location.longitude
+            }else{
+                lat = null
+                lon = null
+            }
+
+            Log.i("ELDERHOME:GPS:LOCATION", "Current location is{$lat, $lon}")
         }
     }
 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_button_light_20"
+    android:padding="20dp">
+
+    <!-- Текст -->
+    <TextView
+        android:id="@+id/request_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Контакт хочет стать вашим доверенным лицом"
+        android:textSize="16sp"
+        android:textColor="#0F172A"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Кнопки -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Принять -->
+        <TextView
+            android:id="@+id/accept_button"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_accept"
+            android:gravity="center"
+            android:text="Принять"
+            android:textColor="#065F46"
+            android:textSize="14sp"/>
+
+        <!-- Отклонить -->
+        <TextView
+            android:id="@+id/reject_button"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_reject"
+            android:gravity="center"
+            android:text="Отклонить"
+            android:textColor="#991B1B"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

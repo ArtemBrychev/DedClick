@@ -39,7 +39,7 @@ object ContactApiProvider {
 
 
     //Для получения запроса на аконтакт
-    suspend fun getContactRequest(token:String): ApiResult<ContactDto>{
+    suspend fun getContactRequest(token:String): ApiResult<List<ContactDto>>{
         return try{
             val response = contactService.getContacts("Bearer $token")
 
@@ -49,14 +49,16 @@ object ContactApiProvider {
                 if(list!=null){
                     val filteredList = list.filter{it.status==0}
 
-                    var contact: ContactDto? = null
-                    if(filteredList.isNotEmpty()){
-                        contact = filteredList[0]
-                        contact.keeper.roleName = "trusted"
-                        contact.member.roleName = "elder"
-                    }
+                    if(filteredList.isNotEmpty()) {
+                        for (contact in filteredList) {
+                            contact.keeper.roleName = "trusted"
+                            contact.member.roleName = "elder"
+                        }
 
-                    ApiResult.Success(contact)
+                        ApiResult.Success(filteredList)
+                    }else{
+                        ApiResult.Error(-1, "Empty response body")
+                    }
                 }else{
                     ApiResult.Error(-1, "Empty response body")
                 }
@@ -85,6 +87,19 @@ object ContactApiProvider {
                 )
             }
         } catch (e:Exception){
+            ApiResult.Error(-1, e.message)
+        }
+    }
+
+    suspend fun respondContact(id: Long, token: String) : ApiResult<Unit>{
+        return try{
+            val response = contactService.respondContact(id, "Bearer $token")
+            if(response.isSuccessful){
+                ApiResult.Success(Unit)
+            }else{
+                ApiResult.Error(response.code(), response.errorBody()?.string())
+            }
+        }catch (e:Exception){
             ApiResult.Error(-1, e.message)
         }
     }

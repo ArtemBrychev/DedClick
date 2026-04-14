@@ -59,11 +59,11 @@
                     android:paddingRight="20dp"
                     android:gravity="center_vertical">
 
-                    <TextView
+                    <EditText
                         android:id="@+id/phone_input_field"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Введите номер телефона"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Введите номер телефона"
                         android:textSize="14sp"
                         android:textColor="#94A3B8" />
                 </LinearLayout>

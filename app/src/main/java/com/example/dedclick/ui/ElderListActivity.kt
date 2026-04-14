@@ -1,5 +1,6 @@
 package com.example.dedclick.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.example.dedclick.data.model.ContactsAdapter
 import com.example.dedclick.data.model.ElderAdapter
 import com.example.dedclick.databinding.ActivityElderHomeBinding
 import com.example.dedclick.databinding.ActivityElderListBinding
+import com.example.dedclick.databinding.ActivityTrustedHomeBinding
 import com.example.dedclick.service.ApiResult
 import com.example.dedclick.service.ContactApiProvider
 import kotlinx.coroutines.launch
@@ -25,6 +27,11 @@ class ElderListActivity : ComponentActivity(){
         binding = ActivityElderListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         authManager = AuthManager(applicationContext)
+
+        binding.backButton.setOnClickListener {
+            val intent = Intent(this, TrustedHomeActivity::class.java)
+            startActivity(intent)
+        }
 
         lifecycleScope.launch {
             val token = authManager.getUserAuthInfo()?.token
@@ -42,10 +49,26 @@ class ElderListActivity : ComponentActivity(){
                         Toast.LENGTH_LONG).show()
                     return@setOnClickListener
                 }
-
-
-                //TODO: написать логику отправки запросов на добавление контактов. В апи провайдере по идее уже все есть
-
+                lifecycleScope.launch {
+                    val result = ContactApiProvider.addContact(token, phone)
+                    val message = when(result){
+                        is ApiResult.Success -> {
+                            "Запрос успешно отправлен пользователю: $phone"
+                        }
+                        is ApiResult.Error -> {
+                            when(result.code){
+                                400 -> "Невозможно добавить контакт\n" +
+                                        "Пользователь $phone является доверенным лицом"
+                                401 -> "Ошибка при аутентификации, перезайдите в аккаунт"
+                                404 -> "Такого пользователя не существует"
+                                else -> "Непредвиденная ошибка, попробуйте позже"
+                            }
+                        }
+                    }
+                    Toast.makeText(this@ElderListActivity,
+                        message,
+                        Toast.LENGTH_LONG).show()
+                }
             }
 
 

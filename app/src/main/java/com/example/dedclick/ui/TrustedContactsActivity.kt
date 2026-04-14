@@ -1,5 +1,6 @@
 package com.example.dedclick.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -24,6 +25,11 @@ class TrustedContactsActivity : ComponentActivity(){
         binding = ActivityTrustedContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         authManager = AuthManager(applicationContext)
+
+        binding.backButton.setOnClickListener {
+            val intent = Intent(this, ElderHomeActivity::class.java)
+            startActivity(intent)
+        }
 
         lifecycleScope.launch {
             val token = authManager.getUserAuthInfo()?.token

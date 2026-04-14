@@ -40,5 +40,9 @@ class ElderAdapter(
         holder.binding.deleteButton.setOnClickListener {
             onDeleteClick(contact)
         }
+
+        holder.binding.infoButton.setOnClickListener {
+            onInfoClick(contact)
+        }
     }
 }
