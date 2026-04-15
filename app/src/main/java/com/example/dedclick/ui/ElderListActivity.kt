@@ -106,17 +106,11 @@ class ElderListActivity : ComponentActivity(){
 
                         onInfoClick = { contact ->
                             val user = contact.member
-
-                            Toast.makeText(
-                                this@ElderListActivity,
-                                "Пользователь: ${user.fullName}",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            Toast.makeText(
-                                this@ElderListActivity,
-                                "Функция пока не доступна",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            Log.d("INFO:ID", user.id.toString())
+                            val intent = Intent(this@ElderListActivity, InfoScreen::class.java)
+                            intent.putExtra("id", user.id)
+                            startActivity(intent)
+                            finish()
                         }
                     )
 

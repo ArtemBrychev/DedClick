@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Кнопка назад -->
+        <ImageView
+            android:id="@+id/priveous_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_card_grey"
+            android:src="@drawable/arrow_back"
+            android:padding="8dp"
+            android:scaleType="centerInside" />
+
+        <!-- Заголовок -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Информация"
+            android:textSize="20sp"
+            android:textColor="#0F172A"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Карточка пользователя -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_button_dark_28"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Близкий"
+                android:textSize="14sp"
+                android:textColor="#CBD5E1"/>
+
+            <TextView
+                android:id="@+id/contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Колосова Нина Сергеевна"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/last_signal_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Последний check-in: сегодня в 09:42"
+                android:textSize="14sp"
+                android:textColor="#CBD5E1"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- Координаты -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_button_light_28"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Местоположение последнего check-in"
+                android:textSize="14sp"
+                android:textColor="#64748B"/>
+
+            <TextView
+                android:id="@+id/coords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="56.9496, 24.1052"
+                android:textSize="20sp"
+                android:textColor="#0F172A"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Координаты были получены вместе с последним сигналом"
+                android:textSize="14sp"
+                android:textColor="#64748B"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Расписание -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_button_light_28"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Расписание check-in"
+                android:textSize="18sp"
+                android:textColor="#0F172A"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Время:"
+                android:textSize="14sp"
+                android:textColor="#64748B"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/scheduleText"
+                android:text="09:00, 14:00, 19:00"
+                android:textSize="18sp"
+                android:textColor="#0F172A"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Если сигнал не приходит в течение 30 минут, запускается сценарий проверки."
+                android:textSize="14sp"
+                android:textColor="#64748B"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

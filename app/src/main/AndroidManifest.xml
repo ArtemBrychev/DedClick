@@ -35,6 +35,7 @@
         <activity android:name=".ui.TrustedHomeActivity"></activity>
         <activity android:name=".ui.ElderListActivity"></activity>
         <activity android:name=".ui.TrustedContactsActivity"></activity>
+        <activity android:name=".ui.InfoScreen"></activity>
 
     </application>
 

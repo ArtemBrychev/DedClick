@@ -40,4 +40,22 @@ object HeartbeatApiProvider {
             ApiResult.Error(-1, "Ошибка при отправке запроса")
         }
     }
+
+    suspend fun getHeartbeat(id:Long, token: String): ApiResult<HeartbeatDto>{
+        return try{
+            val response = heartbeatService.getHeartbeatById(id, "Bearer $token")
+            if(response.isSuccessful){
+                if(response.body() != null){
+                    return ApiResult.Success(response.body())
+                }else{
+                    Log.e("GET:SELF:HEARTBET", "ААААААА ПУСТОЕ ТЕЛО ПУСТОЕ ТЕЛО ПУСТОЕ ТЕЛО ПУСТОЕ ТЕЛО")
+                    return ApiResult.Error(-1, "Empty body")
+                }
+            }else{
+                ApiResult.Error(response.code(), response.message())
+            }
+        }catch (e: Exception){
+            ApiResult.Error(-1, "Ошибка при отправке запроса")
+        }
+    }
 }
