@@ -18,7 +18,8 @@
             android:src="@drawable/arrow_back"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:tint="#0F172A"/>
+            android:tint="#0F172A"
+            android:layout_marginTop="20dp"/>
 
         <!-- Карточка -->
         <LinearLayout

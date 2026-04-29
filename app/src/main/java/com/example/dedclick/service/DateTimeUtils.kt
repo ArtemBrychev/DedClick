@@ -2,6 +2,7 @@ package com.example.dedclick.service
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -37,5 +38,12 @@ object DateTimeUtils {
             yesterday -> "вчера в $time"
             else -> zoned.format(fullFormatter)
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun parseToInstant(isoString: String): Instant {
+        return LocalDateTime.parse(isoString)
+            .atZone(ZoneId.of("UTC"))
+            .toInstant()
     }
 }

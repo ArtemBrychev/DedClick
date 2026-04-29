@@ -1,10 +1,12 @@
 package com.example.dedclick.ui
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.example.dedclick.data.AuthManager
 import com.example.dedclick.databinding.ActivityInfoBinding
@@ -18,6 +20,7 @@ class InfoScreen : ComponentActivity() {
     private lateinit var binding: ActivityInfoBinding
     private lateinit var authManager: AuthManager
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceStore: Bundle?) {
         super.onCreate(savedInstanceStore)
         binding = ActivityInfoBinding.inflate(layoutInflater)
@@ -62,7 +65,7 @@ class InfoScreen : ComponentActivity() {
                         "Последний check-in:" +
                             DateTimeUtils.formatSignalTime(userInfo.tappedAt)
                     }else{
-                        "Не удалось полчить время"
+                        "Не удалось получить время"
                     }
                     binding.coords.text = if(userInfo.lat != null && userInfo.lon!=null){
                         "${userInfo.lat}, ${userInfo.lon}"

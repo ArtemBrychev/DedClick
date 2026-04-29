@@ -40,7 +40,7 @@
                 android:id="@+id/title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Предохронитель\nдеда"
+                android:text="The Fuse"
                 android:textSize="28sp"
                 android:textColor="#0F172A"
                 android:textStyle="bold"

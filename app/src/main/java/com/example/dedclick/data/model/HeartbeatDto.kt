@@ -5,5 +5,6 @@ data class HeartbeatDto(
     val user: UserShortDto,
     val tappedAt: String,
     val lat: Double?,
-    val lon: Double?
+    val lon: Double?,
+    val status: String
 )
