@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_alert_card"
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
+    <!-- Красный кружок -->
+    <FrameLayout
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/bg_circle_red">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="!"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <!-- Текстовая часть -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Check-in пропущен"
+            android:textSize="18sp"
+            android:textColor="#991B1B"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/subtitle_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="от контакта Нина Сергеевна"
+            android:textSize="13sp"
+            android:textColor="#F87171"/>
+    </LinearLayout>
+
+</LinearLayout>

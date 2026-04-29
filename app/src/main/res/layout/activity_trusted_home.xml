@@ -92,13 +92,20 @@
             android:textColor="#0F172A"
             android:gravity="center" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/alerts_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_text"
+            android:layout_marginTop="16dp"/>
+
 
         <!-- КНОПКА ВЫХОДА ИЗ АККАУНТА ТОЛЬКО НА ВРЕМЯ  РАЗРАБОТКИ-->
         <LinearLayout
             android:id="@+id/logout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/info_text"
+            android:layout_below="@id/alerts_list"
             android:layout_marginTop="24dp"
             android:orientation="vertical"
             android:background="@drawable/ic_delete_cross"

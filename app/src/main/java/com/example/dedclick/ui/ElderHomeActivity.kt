@@ -39,6 +39,7 @@ class ElderHomeActivity  : ComponentActivity(){
 
     private val shownRequests = mutableSetOf<Long>()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceStore: Bundle?){
         super.onCreate(savedInstanceStore)
 

@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dedclick.data.AuthManager
+import com.example.dedclick.data.model.AlertAdapter
 import com.example.dedclick.data.model.ContactDto
 import com.example.dedclick.data.model.ElderAdapter
 import com.example.dedclick.data.model.HeartbeatDto
@@ -32,6 +33,10 @@ class TrustedHomeActivity  : ComponentActivity(){
         setContentView(binding.root)
         authManager = AuthManager(applicationContext)
 
+        val adapter = AlertAdapter(emptyList())
+        binding.alertsList.layoutManager = LinearLayoutManager(this)
+        binding.alertsList.adapter = adapter
+
 
         binding.logoutButton.setOnClickListener {
             lifecycleScope.launch {
@@ -45,7 +50,6 @@ class TrustedHomeActivity  : ComponentActivity(){
             startActivity(Intent(this@TrustedHomeActivity, ElderListActivity::class.java))
             finish()
         }
-
 
         lifecycleScope.launch {
             val token = authManager.getUserAuthInfo()?.token
@@ -76,6 +80,10 @@ class TrustedHomeActivity  : ComponentActivity(){
                                 val result = HeartbeatApiProvider.getHeartbeat(contact.member.id, token)
                                 if (result is ApiResult.Success) result.data else null
                             }
+
+                            val missedList = heartBeatList.filter { it.status == "ALERT" }
+
+                            if(missedList.isNotEmpty()) adapter.updateData(missedList)
 
                             val latest = heartBeatList.maxByOrNull {
                                 DateTimeUtils.parseToInstant(it.tappedAt)
