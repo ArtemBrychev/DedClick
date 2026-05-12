@@ -22,7 +22,10 @@ import com.example.dedclick.data.model.UserAuthInfo
 import com.example.dedclick.databinding.ActivityCodeBinding
 import com.example.dedclick.service.ApiResult
 import com.example.dedclick.service.AuthApiProvider
+import com.example.dedclick.service.FirebaseApiProvider
+import com.example.dedclick.service.MyFirebaseMessagingService
 import com.example.dedclick.service.UserApiProvider
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 import kotlin.math.log
 
@@ -137,11 +140,14 @@ class CodeActivity : ComponentActivity() {
                         Log.i("NETWORK:USER:GETCURRENTUSERINFO", "Получена информация о авторизации: $userInfo")
                         authManager.saveUserAuthInfo(userInfo)
 
-                        val nextIntent = if (role == "trusted") {
+                        /*val nextIntent = if (role == "trusted") {
                             Intent(this@CodeActivity, TrustedHomeActivity::class.java)
                         } else {
                             Intent(this@CodeActivity, ElderHomeActivity::class.java)
-                        }
+                        }*/
+
+                        val nextIntent =
+                            Intent(this@CodeActivity, MainActivity::class.java)
 
                         startActivity(nextIntent)
                         finish()

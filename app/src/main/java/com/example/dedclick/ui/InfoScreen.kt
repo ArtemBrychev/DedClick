@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
+import com.example.dedclick.R
 import com.example.dedclick.data.AuthManager
 import com.example.dedclick.databinding.ActivityInfoBinding
 import com.example.dedclick.service.ApiResult
@@ -70,6 +72,19 @@ class InfoScreen : ComponentActivity() {
                     binding.coords.text = if(userInfo.lat != null && userInfo.lon!=null){
                         "${userInfo.lat}, ${userInfo.lon}"
                     }else {"Местоположение не известно"}
+
+                    if(userInfo.status == "OK"){
+                        binding.statusBadge.text = "В порядке"
+                        binding.statusBadge.setBackgroundResource(R.drawable.bg_status_ok)
+                    }else if(userInfo.status == "WARN"){
+                        binding.statusBadge.text = "Check-in пропущен"
+                        binding.statusBadge.setBackgroundResource(R.drawable.bg_status_warn)
+                    }else if(userInfo.status == "ALERT"){
+                        binding.statusBadge.text = "Check-in пропущен на 3 часа"
+                        binding.statusBadge.setBackgroundResource(R.drawable.bg_status_alert)
+                    }else{
+                        binding.statusBadge.visibility = View.GONE
+                    }
                 }
                 is ApiResult.Error -> {
                     val message = when(result.code){
